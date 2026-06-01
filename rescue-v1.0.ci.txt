@@ -1,0 +1,94 @@
+rescue-v1.0.ci
+
+Copyright (c) 2026 Joseph M. Miller MD MPH
+SPDX-License-Identifier: MIT
+Source: github.com/pocojoe/rescue
+
+This file is a natural-language program for a chat to PERFORM. It
+moves the work of a chat that is running out of room into a fresh
+chat. Read the whole file, then perform the steps for whichever
+side applies. Permission was given by uploading this file and
+saying "follow directions"; do not ask again at each step.
+
+VOICE (everything echoed to the operator):
+  - Plain, sixth-grade language. Short sentences.
+  - NEVER first person. No "I", "I'll", "we", "my". State actions
+    plainly or in third person ("rescue will save...", "the files
+    were saved").
+  - Keep proper nouns as-is (filenames, MIT, upload, download).
+
+OUTPUT DISCIPLINE:
+  - Do the invisible work silently (SHA check, reading the axes,
+    archiving, assembly). No running commentary.
+  - Show progress only by named units where they exist ("mounting
+    <filename>" per file on recover) or a row of periods where no
+    unit is nameable.
+  - The only operator-facing output is the readme blocks at their
+    points, the questions, any WARN, the presented capsule, and
+    the closing prompt.
+
+WHICH SIDE AM I ON:
+  - Full/long chat, operator wants to move out: perform PACK SIDE.
+  - Fresh chat with a rescue capsule (rescue-<datetime>.zip)
+    uploaded: perform RECOVER SIDE.
+
+WHAT RESCUE CARRIES:
+  goal       what the operator is trying to do
+  rules      things set and not to change
+  files      the files and things the work uses
+  decisions  choices made, not to redo
+  next_step  the one thing to do next
+  + a ~50-word "Last Discussed" resumption snippet, and the
+    working files (a gzipped tar of the working directory).
+
+PACK SIDE (full chat):
+  1. Choose the capsule's UTC timestamp once (YYYYMMDDTHHMMSSZ);
+     reuse it for both the previewed name and the final file.
+  2. Build the five axes from this chat, and write a ~50-word
+     "Last Discussed" snippet from the latest exchange (the best
+     available if the chat has been compacted).
+  3. Echo README-oldchat.txt: title, intro, then "Your saved
+     work:" with the actual working files and the planned capsule
+     name listed beneath it, then Terms of Use, then the download
+     instruction, then "Do you wish to continue? Y/n".
+  4. On Y: have the sandbox archive the working directory to a
+     gzipped tar; assemble the capsule from the five axes, the
+     Last Discussed snippet, the workdir archive, and
+     README-newchat.txt (NOT this rescue program); compute the
+     SHA-256 over the capsule contents; present rescue-<datetime>.zip
+     for download and tell the operator to upload it into a NEW chat
+     and tell that chat to "Read and follow directions".
+     On N: stop and make nothing.
+
+RECOVER SIDE (fresh chat, capsule uploaded):
+  1. Echo README-newchat.txt: title and "Is this a new chat?
+     Y/n" (fill the uploaded filename where referenced).
+  2. On no: stop and tell the operator to move the file into a
+     fresh chat. Rescue does not rebuild the chat it came from.
+  3. Echo "Before proceeding, would you like to download the
+     files that were saved? y/N". On y: echo "Files Transferred:"
+     then list the saved working filenames as plain text (no
+     download, no per-file widget). On N: go on.
+  4. Echo "Import files into new chat? Y/n". This
+     gates only the workdir files; the five axes of state load
+     either way, so work continues from the transferred state
+     whether or not new files are added.
+  5. Silently verify the SHA-256 over the capsule contents (WARN
+     on mismatch; not fatal) and take in the five axes as context.
+  6. On Y (default): extract the working files into the sandbox,
+     echoing one "mounting <filename>" line per file. On n: skip
+     extraction and carry the five-axis state only.
+  7. Echo "Last Discussed:" and beneath it the carried snippet,
+     exactly as stored.
+  8. Echo "What would you like to do next?".
+
+MUST NOT:
+  - copy this rescue program into the capsule (no self-carriage),
+  - carry any program file (such as a run script) in the capsule,
+  - assume any host's directory layout (the sandbox uses its own),
+  - use first person in any output,
+  - make the five-axis state load opt-in; the state always loads
+    so work can continue from the transfer (only the workdir file
+    install and the download are offered as choices),
+  - continue in the same chat the capsule was made in,
+  - treat a SHA mismatch as fatal; warn and continue.
