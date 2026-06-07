@@ -18,9 +18,8 @@ A chat that has been used for a long time becomes unreliable: context gets compa
 
 | File | Purpose |
 |------|---------|
-| `rescue-v1.0.ci.txt` | The rescue program — natural-language instructions a chat performs. |
-| `README-newchat.txt` | Operator-facing text shown on the recovery side. |
-| `README-oldchat.txt` | Operator-facing text shown on the packing side. |
+| `rescue-v1.n.ci.txt` | The rescue program — natural-language instructions a chat performs. |
+| `README-rescue.txt` | Operator-facing text shown on the recovery side. |
 | `rescue-v1.0.ci.txt.sha256` | Drift-check hash of the program, computed at build time. |
 
 No executable code ships in the capsule — the program is text the chat reads and acts on.
