@@ -2,7 +2,7 @@
 
 **Move the work of a chat that is running out of room into a fresh chat — without losing the thread.**
 
-Rescue is a single-use, natural-language program that a chat *performs*. It rescues a long-running conversation that has started to degrade and carries its working state into a new chat, where the work continues from where it left off.
+Rescue is a single-use, natural-language program that a chat *performs*. It rescues a long-running conversation that has started to degrade and carries its working state into a new chat, where the work continues from where it left off.  Rescue has been tested on Claude and ChatGPT.  It utilizes zip files that Gemini does not support.  Rescue has not been tested against Grok.
 
 Source: [github.com/pocojoe/rescue](https://github.com/pocojoe/rescue) · MIT License · © 2026 Joseph M. Miller MD MPH
 
